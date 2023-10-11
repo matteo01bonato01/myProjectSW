@@ -1,8 +1,5 @@
 package it.isa.progetto;
 
-import java.sql.Connection;
-import java.sql.Statement;
-
 /**
  * Hello world!
  *
@@ -20,7 +17,7 @@ public class App
     	d.esegui();
     	
     	
-    	
+    	System.out.println("palle");
     	/***************************************************/
 		CreaTabellaUtente ctutente = new CreaTabellaUtente();
 		ctutente.esegui();
