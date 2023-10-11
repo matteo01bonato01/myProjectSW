@@ -160,7 +160,7 @@ public class GestioneUtente {
 	
 
 	/*********** TABELLA PER PRENOTARSI/CANCELLARSI AGLI/DAGLI EVENTI **************************/
-	private void prenota_cancella(final String user, final String password) {
+	void prenota_cancella(final String user, final String password) {
 		//Creo JFrame per effettuare mie prenotazioni
         framePrenotami = new JFrame("Lista per cancellazione/iscrizione dagli/agli eventi");
         framePrenotami.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -365,14 +365,14 @@ public class GestioneUtente {
 	
 	
 	
-	private void delEvento(int id_prenotazione, String login, String passw) {
+	void delEvento(int id_prenotazione, String login, String passw) {
 		try {
 			con = DriverManager.getConnection(url,"matteo","NuovaOpelCorsa");
 	    	stmt = con.createStatement();
 	    	
 	    	stmt.execute("delete from PRENOTAZIONE where ID=" + id_prenotazione + ";");
 	    	
-			System.out.println(id_prenotazione);
+			//System.out.println(id_prenotazione);
 		} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -384,24 +384,15 @@ public class GestioneUtente {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	private void addEvento(int id_evento, String login, String passw) {
+	void addEvento(int id_evento, String login, String passw) {
 		try {
 			con = DriverManager.getConnection(url,"matteo","NuovaOpelCorsa");
 	    	stmt = con.createStatement();
 	    	
 	    	stmt.execute("insert into PRENOTAZIONE(LOGIN_UR, ID_EVENTO) values('" + login + "', '" + id_evento + "');");
 	
-	    	System.out.println(id_evento);
+	    	//System.out.println(id_evento);
 		} catch (SQLException ex) {
 			// TODO Auto-generated catch block
 			System.err.print("ERRORE su add PRENOTAZIONE ");
@@ -428,7 +419,7 @@ public class GestioneUtente {
 	
 	
 	/************* MODIFICA TUO PROFILO *****************/
-	private void modificaProfilo(String log) {
+	void modificaProfilo(String log) {
 		
         frModifica = new JFrame("Modifica Profilo");
         frModifica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -567,7 +558,7 @@ public class GestioneUtente {
 	
 	
 	
-	private void updateModProfilo(String log, String passw, String nome, String cognome, String data_nascita, String email) {
+	void updateModProfilo(String log, String passw, String nome, String cognome, String data_nascita, String email) {
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
 

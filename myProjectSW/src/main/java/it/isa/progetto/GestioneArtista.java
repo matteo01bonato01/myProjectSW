@@ -154,7 +154,7 @@ public class GestioneArtista {
 	
 
 	/************* MODIFICA TUO PROFILO *****************/
-	private void modificaProfilo(String log) {
+	void modificaProfilo(String log) {
 		
         frModifica = new JFrame("Modifica Profilo");
         frModifica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -184,6 +184,7 @@ public class GestioneArtista {
 				jnomeartista = new JTextField();
 				jnomeartista.setDocument(new JTextFieldLimit(33));
 				jnomeartista.setText(rsmodifica.getString("NOME_ARTISTA").trim());
+				jnomeartista.setEditable(false);
 				//approfitto del valore NOME_ARTISTA estratto per aprire la finestra con i miei EVENTI
 				mieiEventi(jnomeartista.getText().trim());
 				
@@ -282,7 +283,10 @@ public class GestioneArtista {
 	
 	
 	
-	private void updateModProfilo(String log, String passw, String nomeArtista, String dataFormazione, String numComponenti, String genere) {
+	void updateModProfilo(String log, String passw, String nomeArtista, String dataFormazione, String numComponenti, String genere) {
+		int numeroC = Integer.parseInt(numComponenti);
+
+		
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
 
@@ -297,9 +301,9 @@ public class GestioneArtista {
         	con = DriverManager.getConnection(url,"matteo","NuovaOpelCorsa");
 			stmt = con.createStatement();
         	stmt.executeUpdate("update ARTISTA"
-        			+ " set PASSW='"+passw+"', NOME_ARTISTA='"+nomeArtista+"', DATA_FORMAZIONE='"+dataFormazione
-        			+ "', NUM_COMPONENTI='"+numComponenti+"', GENERE='"+genere+"' "
-        			+ "  where LOG='" + log + "';");
+        			+ " set PASSW='"+passw+"', DATA_FORMAZIONE='"+dataFormazione
+        			+ "', NUM_COMPONENTI="+numeroC+", GENERE='"+genere+"' "
+        			+ "  where LOG='" + log + "' and NOME_ARTISTA='"+nomeArtista+"';");
 			
 		} catch (SQLException e1) {
 			System.out.println("Errore aggiornamento dati personali dell'utente: ");
@@ -316,7 +320,7 @@ public class GestioneArtista {
 	
 	
 	
-	private void mieiEventi(String nomeArtista) {
+	void mieiEventi(String nomeArtista) {
 
 		//Creo unJFrame per visualizzare la tabella
 		frameMieiEventi = new JFrame("I tuoi eventi in programma");

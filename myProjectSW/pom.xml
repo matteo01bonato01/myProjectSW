@@ -19,19 +19,12 @@
   </properties>
 
   <dependencies>
-  	<dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
-	</dependency>
-    <!-- di default
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
-    </dependency>-->
+    </dependency>
     
     
     <dependency>
@@ -59,18 +52,10 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
         </plugin>
-        
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M6</version>
-		</plugin>
-        <!-- di default
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
-        </plugin>-->
-        
+        </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
@@ -96,7 +81,6 @@
         
         
 		<!-- PER ESEGUIRE SOLO CON mvn exec:java -->
-        
         <plugin>
 		  <groupId>org.codehaus.mojo</groupId>
 		  <artifactId>exec-maven-plugin</artifactId>
@@ -110,9 +94,7 @@
 		</plugin>
 		
 		
-		
 		<!-- ESEGUO CODICE DURANTE IL COMPILE PER COMODITA'-->
-		<!--
 		<plugin>
 		    <groupId>org.codehaus.mojo</groupId>
 		    <artifactId>exec-maven-plugin</artifactId>
@@ -129,7 +111,7 @@
 		            </goals>
 		        </execution>
 		    </executions>
-		</plugin>-->
+		</plugin>
       </plugins>
     <!--</pluginManagement>-->
   </build>

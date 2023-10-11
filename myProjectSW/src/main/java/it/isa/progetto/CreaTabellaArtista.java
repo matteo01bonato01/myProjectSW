@@ -35,7 +35,6 @@ public class CreaTabellaArtista {
 					"DATA_FORMAZIONE date NOT NULL, " +
 					"NUM_COMPONENTI int NOT NULL, " +
 					"GENERE char(15) NOT NULL ); ");
-					//"PRIMARY KEY(LOGIN));");
         	
 		} catch(SQLException ex) {
 			System.err.println("ERRORE CREATE ARTISTA: "+ex.getMessage());

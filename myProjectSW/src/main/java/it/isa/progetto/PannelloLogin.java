@@ -24,11 +24,11 @@ public class PannelloLogin {
 	static Statement stmt, stmtcheck;
 	
 	
-	private static JFrame frTabLogin, frTabConferma;
-	private static JPanel jpTabLogin;
-	private static JLabel jlRisultato;
-	private static JTextField user;
-	private static JPasswordField passw;
+	private JFrame frTabLogin, frTabConferma;
+	private JPanel jpTabLogin;
+	private JLabel jlRisultato;
+	private JTextField user;
+	private JPasswordField passw;
 	
 	
 	public void show() {
@@ -72,7 +72,7 @@ public class PannelloLogin {
 				//System.out.println("Cosa ricevo: " + user.getText().trim()+"\\");
 				
 					frTabLogin.setVisible(false);
-					
+					/* SPOSTATO IN CHECK-LOGIN
 					//Creo un JFrame per Swing di conferma
 					frTabConferma = new JFrame("Conferma");
 					frTabConferma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,18 +91,20 @@ public class PannelloLogin {
 					frTabConferma.setLocation(700, 460);
 					frTabConferma.setSize(400,170);
 					frTabConferma.setVisible(true);
-					
+					*/
 					
 					checkLogin(user, passw);
 					
 					//import javax.swing.Timer; CHIUDO FINESTRA DOPO 3 SECONDI
-					Timer timer = new Timer(3000, new ActionListener(){
+					/*spostato in checkLogin
+					 Timer timer = new Timer(3000, new ActionListener(){
 					    public void actionPerformed(ActionEvent evt) {
 					    	frTabConferma.dispose();
 					    }
 					});
 					timer.setRepeats(false);
 					timer.start();
+					*/
 					
 				//}//IF
 				
@@ -114,14 +116,34 @@ public class PannelloLogin {
 	
 	
 
-	public static void checkLogin(JTextField userN, JPasswordField passw) {
+	public void checkLogin(JTextField userN, JPasswordField passw) {
 
 		String nomeAutenticato = userN.getText();
-		System.out.println("USER CONVERTITO DA JTEXTFIELD: " + nomeAutenticato);
+//		System.out.println("USER CONVERTITO DA JTEXTFIELD: " + nomeAutenticato);
 		
 		char[] p = passw.getPassword();
 		String passwordInserita = new String(p);
-		System.out.println("PASSWORD CONVERTITA DA JTEXTFIELD: " + passwordInserita);
+//		System.out.println("PASSWORD CONVERTITA DA JTEXTFIELD: " + passwordInserita);
+		
+		//Creo un JFrame per Swing di conferma
+		frTabConferma = new JFrame("Conferma");
+		frTabConferma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frTabConferma.setResizable(false);
+		
+		jlRisultato = new JLabel();
+		jlRisultato.setOpaque(true);		//questi due assieme, senno non colorano lo sfondo
+		jlRisultato.setBackground(Color.BLACK);//e questo
+		
+		
+		jlRisultato.setForeground(Color.ORANGE);
+		jlRisultato.setHorizontalAlignment((int)0.6);
+		
+
+		frTabConferma.add(jlRisultato);
+		frTabConferma.setLocation(700, 460);
+		frTabConferma.setSize(400,170);
+		frTabConferma.setVisible(true);
+		
 		
 		
 		// CONNESSIONE A DB2
@@ -168,7 +190,8 @@ public class PannelloLogin {
 	        		if(resultSetArtist.next()) {
 		        		String log = resultSetArtist.getString("LOG").trim();
 		        		String chiave = resultSetArtist.getString("PASSW").trim();
-		        		System.out.println("Trovato");
+		        		
+		        		
 		        		jlRisultato.setForeground(Color.GREEN);
 						jlRisultato.setHorizontalAlignment((int)0.6);
 		        		jlRisultato.setText("<html><table><td><tr>User: " + log + 
@@ -188,6 +211,17 @@ public class PannelloLogin {
 			System.out.println("Errore nella ricerca utente sul DB: ");
 			e1.printStackTrace();
 		}
+		
+		
+		
+		
+		Timer timer = new Timer(3000, new ActionListener(){
+		    public void actionPerformed(ActionEvent evt) {
+		    	frTabConferma.dispose();
+		    }
+		});
+		timer.setRepeats(false);
+		timer.start();
 	}//checklogin
 
 }
